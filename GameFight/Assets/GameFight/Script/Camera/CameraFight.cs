@@ -12,6 +12,7 @@ public class CameraFight : MonoBehaviour {
 		target = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
 		relVec = transform.position -target.position ;
 
+
 	}
 
 	void Update () {

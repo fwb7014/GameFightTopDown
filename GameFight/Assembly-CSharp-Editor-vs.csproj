@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{E04AB3B0-66E0-9D85-5C9E-9F2AD027722D}</ProjectGuid>
+	<ProjectGuid>{B27F44DD-B986-BC58-1FD2-6E6F5776409E}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<AssemblyName>Assembly-CSharp-Editor</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
 	<BaseDirectory>Assets</BaseDirectory>
@@ -46,33 +46,33 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DamageNum.cs" />
-     <Compile Include="Assets\GameFight\Effect\DestroyForTime.cs" />
-     <Compile Include="Assets\GameFight\Effect\ScrollUV.cs" />
-     <Compile Include="Assets\GameFight\Script\Camera\CameraFight.cs" />
-     <Compile Include="Assets\GameFight\Script\Common\CommonClass.cs" />
-     <Compile Include="Assets\GameFight\Script\Common\Hp_bar.cs" />
-     <Compile Include="Assets\GameFight\Script\EffectSwing.cs" />
-     <Compile Include="Assets\GameFight\Script\Enemy\EnemyAi.cs" />
-     <Compile Include="Assets\GameFight\Script\Enemy\EnemySkill.cs" />
-     <Compile Include="Assets\GameFight\Script\Enemy\EnemyStatus.cs" />
-     <Compile Include="Assets\GameFight\Script\Enemy\Monsters.cs" />
-     <Compile Include="Assets\GameFight\Script\LoginSceneScript.cs" />
-     <Compile Include="Assets\GameFight\Script\Player\PlayerAnimControl.cs" />
-     <Compile Include="Assets\GameFight\Script\Player\PlayerControl.cs" />
-     <Compile Include="Assets\GameFight\Script\Player\PlayerSkill.cs" />
-     <Compile Include="Assets\GameFight\Script\Player\PlayerStatus.cs" />
-     <Compile Include="Assets\GameFight\Script\Setting\GameSetting.cs" />
-     <Compile Include="Assets\GameFight\Test\A.cs" />
-     <Compile Include="Assets\GameFight\Test\B.cs" />
-     <Compile Include="Assets\GameManager.cs" />
-     <Compile Include="Assets\PlayerDetect.cs" />
-     <Compile Include="Assets\WeaponControl.cs" />
+     <Compile Include="Assets\EasyTouch\Plugins\Editor\GUIEasyButtonCallBack.cs" />
+     <Compile Include="Assets\EasyTouch\Plugins\Editor\GUIEasyButtonInspector.cs" />
+     <Compile Include="Assets\EasyTouch\Plugins\Editor\GUIEasyJoystickCallBack.cs" />
+     <Compile Include="Assets\EasyTouch\Plugins\Editor\GUIEasyJoystickInspector.cs" />
+     <Compile Include="Assets\EasyTouch\Plugins\Editor\GUIEasyTouchInspector.cs" />
+     <Compile Include="Assets\EasyTouch\Plugins\Editor\GUIEasyTouchMenu.cs" />
+     <Compile Include="Assets\EasyTouch\Plugins\Editor\GUIEasytouchCallBack.cs" />
+     <Compile Include="Assets\EasyTouch\Plugins\Editor\HTGUILayout.cs" />
+     <None Include="Assets\EasyTouch\Readme_first.txt" />
      <None Include="Assets\GameFight\Model\Swordman\Swordman_Animation.txt" />
      <None Include="Assets\GameFight\Model\Wolf\Wolf_Animation.txt" />
+ <Reference Include="Assembly-UnityScript">
+ <HintPath>F:/myfight-github/myfight-topdown/GameFightTopDown/GameFight/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/Editor/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-vs.csproj">
+      <Project>{E04AB3B0-66E0-9D85-5C9E-9F2AD027722D}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

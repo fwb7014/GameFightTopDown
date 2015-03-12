@@ -6,6 +6,7 @@ public class EnemyStatus : MonoBehaviour {
 	public int maxHp = 100;
 	public float height = 1.5f;
 	public Vector2 barSize = new Vector2(0.8f,0.2f);
+	public float walkSpeed;
 	// Use this for initialization
 	void Start () {
 	

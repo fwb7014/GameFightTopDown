@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DamageNum.cs" />
      <Compile Include="Assets\GameFight\Effect\DestroyForTime.cs" />
      <Compile Include="Assets\GameFight\Effect\ScrollUV.cs" />
      <Compile Include="Assets\GameFight\Script\Camera\CameraFight.cs" />
@@ -55,15 +56,18 @@
      <Compile Include="Assets\GameFight\Script\Enemy\EnemyAi.cs" />
      <Compile Include="Assets\GameFight\Script\Enemy\EnemySkill.cs" />
      <Compile Include="Assets\GameFight\Script\Enemy\EnemyStatus.cs" />
-     <Compile Include="Assets\GameFight\Script\Enemy\Monster.cs" />
+     <Compile Include="Assets\GameFight\Script\Enemy\Monsters.cs" />
      <Compile Include="Assets\GameFight\Script\LoginSceneScript.cs" />
+     <Compile Include="Assets\GameFight\Script\Player\PlayerAnimControl.cs" />
      <Compile Include="Assets\GameFight\Script\Player\PlayerControl.cs" />
      <Compile Include="Assets\GameFight\Script\Player\PlayerSkill.cs" />
      <Compile Include="Assets\GameFight\Script\Player\PlayerStatus.cs" />
      <Compile Include="Assets\GameFight\Script\Setting\GameSetting.cs" />
      <Compile Include="Assets\GameFight\Test\A.cs" />
      <Compile Include="Assets\GameFight\Test\B.cs" />
+     <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\PlayerDetect.cs" />
+     <Compile Include="Assets\WeaponControl.cs" />
      <None Include="Assets\GameFight\Model\Swordman\Swordman_Animation.txt" />
      <None Include="Assets\GameFight\Model\Wolf\Wolf_Animation.txt" />
  <Reference Include="UnityEngine.UI">

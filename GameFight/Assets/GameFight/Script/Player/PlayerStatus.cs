@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerStatus : MonoBehaviour {
 	public float runSpeed = 1.2f;
+	public float height = 1.6f;
 	[HideInInspector]
 	public float walkSpeed;
 	public float runToWalkDis = 3f;//跑步的最小距离
