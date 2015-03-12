@@ -73,9 +73,17 @@ public class EnemyAi : MonoBehaviour {
 		Vector3 selfForceDir = Vector3.zero;
 		float selfForce = 0;
 		switch (skillid) {
-			case 3:
+		case 1:
 			selfForceDir = selfAttackDir;
-			selfForce =70f;
+			selfForce =50f;
+			break;
+		case 2:
+			selfForceDir = selfAttackDir;
+			selfForce =50f;
+			break;
+		case 3:
+			selfForceDir = selfAttackDir;
+			selfForce =110f;
 			break;
 			case 4:
 			selfForceDir = selfAttackDir;
@@ -90,6 +98,7 @@ public class EnemyAi : MonoBehaviour {
 			}
 			monster.SetDamageNum(transform.position+status.height*Vector3.up,_damage,selfAttackDir);
 		}
+		Debug.Log ("受到伤害 selfForce="+selfForce+"    selfForceDir="+selfForceDir);
 		if (selfForce != 0 && selfForceDir != Vector3.zero) {
 			rigidbody.AddForce(selfForceDir.normalized*selfForce);
 		}

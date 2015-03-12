@@ -7,6 +7,7 @@ public class PlayerAnimControl : MonoBehaviour {
 	private PlayerControl control;
 	private PlayerSkill skill;
 	private Transform playerTransform;
+	private AudioSource audioSource;
 	
 	private Vector3 drawPos;
 	private float drayRadiu;
@@ -17,6 +18,7 @@ public class PlayerAnimControl : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag (Tags.PLAYER);
 		status = player.GetComponent<PlayerStatus> ();
 		control = player.GetComponent<PlayerControl> ();
+		audioSource = player.GetComponent<AudioSource> ();
 		playerTransform = player.transform.root;
 		skill = control.skill;
 	}
@@ -44,8 +46,10 @@ public class PlayerAnimControl : MonoBehaviour {
 			break;
 		}
 
-		if (_skill != null)
-			triggerSkill (_skill);
+		if (_skill != null) {
+			triggerSkill (_skill);	
+		}
+
 	}
 
 	void triggerSkill(PlayerSkill.Skill skill){
@@ -61,6 +65,12 @@ public class PlayerAnimControl : MonoBehaviour {
 
 	// 处理普通攻击技能
 	void handleNormalSkill(PlayerSkill.NorAttackSkill normalSkill){
+
+		if (normalSkill.audioClip != null) {
+			audioSource.PlayOneShot(normalSkill.audioClip);		
+		}
+
+
 		float attackRange = normalSkill.attackRange;
 		Vector3 pos = playerTransform.position + status.height * 0.5f * Vector3.up + playerTransform.forward * status.height/3f;
 		Collider[] cols= Physics.OverlapSphere (pos,attackRange);
@@ -86,6 +96,11 @@ public class PlayerAnimControl : MonoBehaviour {
 	 * 处理技能
 	 * */
 	void handleTechSkill(PlayerSkill.TechSkill techSkill){
+
+		if (techSkill.audioClip != null) {
+			audioSource.PlayOneShot(techSkill.audioClip);		
+		}
+
 		PlayerSkill.TechSkillRange rangeType = techSkill.skillRange;
 		float attackRange = techSkill.attackRange;
 		int skillid = techSkill.skillid;

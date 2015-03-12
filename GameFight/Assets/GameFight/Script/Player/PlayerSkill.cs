@@ -11,6 +11,7 @@ public class PlayerSkill : MonoBehaviour {
 		public SkillKind skillKind;//技能类型
 		public float attackRange;//攻击范围
 		public int skillid;//技能编号
+		public AudioClip audioClip;
 	}
 
 	[System.Serializable]
@@ -36,6 +37,7 @@ public class PlayerSkill : MonoBehaviour {
 	private GameObject player;  
 
 
+
 	public NorAttackSkill getNormalSkill(int skillid){
 		for (int i = 0; i<normalAttack.Length; i++) {
 			if(normalAttack[i].skillid == skillid)
@@ -58,6 +60,7 @@ public class PlayerSkill : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag (Tags.PLAYER);
 		status = player.GetComponent<PlayerStatus> ();
 		playerControl = player.GetComponent<PlayerControl> ();
+
 	}
 	
 	// Update is called once per frame

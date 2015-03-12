@@ -12,11 +12,13 @@ public class GameManager : MonoBehaviour {
 	public GameObject enemyPrefab;
 
 	public int createEnmeyMaxCount;//每次生成最多的个数
-	public float createEnemyTime = 3f;
+	private float createEnemyTime;
+	public float createEnemyTimeOrigin = 3f;
 	// Use this for initialization
 	void Start () {
 		enmeySpawnIndex = 0;
 		currentEnemyCount = 0;
+		createEnemyTime = createEnemyTimeOrigin;
 	}
 	
 	// Update is called once per frame
@@ -30,7 +32,7 @@ public class GameManager : MonoBehaviour {
 
 		if (createEnemyTime < 0) {
 			if(totalEnemyCount>0){
-				createEnemyTime = 3f;
+				createEnemyTime = createEnemyTimeOrigin;
 				int count = Mathf.Min(totalEnemyCount,createEnmeyMaxCount);
 				while(count>0){
 					count --;

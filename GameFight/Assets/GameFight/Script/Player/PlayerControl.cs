@@ -50,7 +50,7 @@ public class PlayerControl : MonoBehaviour {
 		gameSetting = GameSetting.instance;
 	}
 
-
+	    
 	
 	// Update is called once per frame
 	void Update () {
@@ -131,8 +131,6 @@ public class PlayerControl : MonoBehaviour {
 			
 			if (state == ControlState.Move) {
 				if(movePos != Vector3.zero){
-					rigidbody.isKinematic = true;
-					rigidbody.isKinematic = false;
 					moveDir = movePos - transform.position;
 					moveDir[1] = 0f;
 					transform.rotation = Quaternion.LookRotation(moveDir);
@@ -181,7 +179,7 @@ public class PlayerControl : MonoBehaviour {
 			}
 		}
 		if (target == null) {
-			Debug.Log ("没有目标");		
+			//Debug.Log ("没有目标");		
 		}
 
 
