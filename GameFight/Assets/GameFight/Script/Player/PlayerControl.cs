@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour {
 	public Vector3 attackPos;
 	//移动相关
 	private Vector3 moveDir;
+	private float moveAngular;
 	private float moveSpeed;
 	private Vector3 movePos;
 	private float speedFactor = 7f;
@@ -20,6 +21,7 @@ public class PlayerControl : MonoBehaviour {
 	private PlayerStatus status;
 	public PlayerSkill skill;
 	private GameSetting gameSetting;
+	private SphereCollider detectCollider;
 
 	public int localSkillId;//本地技能id  
 
@@ -39,6 +41,7 @@ public class PlayerControl : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		status = GetComponent<PlayerStatus> ();
 		skill = GetComponent<PlayerSkill> ();
+		detectCollider = GameObject.FindGameObjectWithTag (Tags.DETECT).GetComponent<SphereCollider> ();
 	}
 
 	void OnEnable(){
@@ -50,6 +53,7 @@ public class PlayerControl : MonoBehaviour {
 		gameSetting = GameSetting.instance;
 	}
 
+
 	    
 	
 	// Update is called once per frame
@@ -57,69 +61,77 @@ public class PlayerControl : MonoBehaviour {
 		if (clickSkillCount == 0 && Input.anyKeyDown) {
 
 			Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit rayHit;
-
-			if(Physics.Raycast(r,out rayHit,100f)){
+			RaycastHit rayHit; 
+			   
+			if(Physics.Raycast(r,out rayHit,100f,1<<11 |1<<5)){
 				if(rayHit.collider.tag == Tags.FLOOR){
 					float dis = Vector3.Distance(transform.position,rayHit.point);
 					Instantiate(GameSetting.instance.clickFxNormal,new Vector3(rayHit.point.x,rayHit.point.y+0.02f,rayHit.point.z),rayHit.collider.transform.rotation);
 					speedFactor = status.RunSpeedFactor;
 					moveSpeed = status.runSpeed;
 					movePos = rayHit.point;
+					moveAngular = Vector3.Angle(transform.forward,movePos-transform.position);
 					localSkillId = 1;//移动
 			}
 			}
 		}
 
-
 		//状态切换
-		float animSkillId = anim.GetInteger (HashIds.Skillid);
+		int stateHash = anim.GetCurrentAnimatorStateInfo (0).nameHash;
 		int newSkillid = -1;
-		switch (localSkillId) { //2和1 都对应 localskill 1
-			case 0:
-				if(animSkillId == 0 || animSkillId == 1 ||animSkillId == 2||animSkillId == 3){
-					newSkillid = 0;
-					target = null;
-					state = ControlState.Idle;
-				}
-				break;
-			case 1:
-				if(animSkillId == 0 || animSkillId == 1 ||animSkillId == 2||animSkillId == 3){
-					newSkillid = 1;
-					state = ControlState.Move;
-				}
-				break;
-			case 2:
+		switch(localSkillId){ //0 idle 1 2 move  3 普通攻击 其他都是对应的技能
+		case(0):
+			if(stateHash == HashIds.IdleState || stateHash == HashIds.MoveState){
+				newSkillid = 0;
+				state = ControlState.Idle;
+			}else if(stateHash == HashIds.Attack1State|| stateHash == HashIds.Attack2State|| stateHash == HashIds.Attack3State){
+				newSkillid = 0;
+				target = null;
+				state = ControlState.Idle;
+			}
+			break;
+		case(1):
+			if(stateHash == HashIds.IdleState||stateHash == HashIds.MoveState){
 				newSkillid = 1;
 				state = ControlState.Move;
-				break;
-			case 3:
-				if(animSkillId == 0 || animSkillId == 1 ||animSkillId == 2||animSkillId == 3){
-					newSkillid = 3;
-					state = ControlState.Attack;
+			}else if(stateHash == HashIds.Attack1State|| stateHash == HashIds.Attack2State|| stateHash == HashIds.Attack3State){
+				if(movePos != Vector3.zero && moveAngular>=110f){
+					target = null;
 				}
-				break;
-			case 4:
-				if(animSkillId == 0 || animSkillId == 1 ||animSkillId == 2||animSkillId == 3){
-					newSkillid = 4;
-					state = ControlState.XuanFeng;
-				}else if(animSkillId == 4){
-					newSkillid = 0;
-					localSkillId = 0;
-					state = ControlState.Idle;
-				}
-				break;
+				newSkillid = 1;
+				state = ControlState.Move;
+			}
+			break;
+		case(2):
+			newSkillid = 1;
+			state = ControlState.Move;
+			break;
+		case(3)://要普通攻击
+			if(stateHash == HashIds.IdleState){
+				newSkillid = 3;
+				state = ControlState.Attack;
+			}else if(stateHash == HashIds.MoveState){
+				newSkillid = 0;
+				state = ControlState.Idle;
+			}
+			break;
+		case(4):
+			if(stateHash == HashIds.IdleState || stateHash == HashIds.MoveState){
+				newSkillid = 0;
+				state = ControlState.Idle;
+			}
+			break;
 		}
+
 		if (newSkillid != -1) {
 			anim.SetInteger(HashIds.Skillid,newSkillid);
-
 
 			if (state == ControlState.Idle) {
 				movePos = Vector3.zero;
 				moveSpeed = 0f;
 				speedFactor = 0f;
 				anim.SetFloat(HashIds.Speed,speedFactor);
-			}
+			} 
 
 			if(state == ControlState.Attack){
 				movePos = Vector3.zero;
@@ -147,6 +159,87 @@ public class PlayerControl : MonoBehaviour {
 			}
 
 		}
+
+
+		//状态切换
+//		float animSkillId = anim.GetInteger (HashIds.Skillid);
+//		int newSkillid = -1;
+//		switch (localSkillId) { //2和1 都对应 localskill 1
+//			case 0:
+//				if(animSkillId == 0 || animSkillId == 1 ||animSkillId == 3){
+//					newSkillid = 0;
+//					target = null;
+//					state = ControlState.Idle;
+//				}
+//				break;
+//			case 1:
+//				if(animSkillId == 0 || animSkillId == 1){
+//					newSkillid = 1;
+//					state = ControlState.Move;
+//				}  
+//				else if(animSkillId == 3){
+//					newSkillid = 0;
+//					state = ControlState.Idle;
+//				}
+//				break;
+//			case 2:
+//				newSkillid = 1;
+//				state = ControlState.Move;
+//				break;
+//			case 3:
+//				if(animSkillId == 0 || animSkillId == 1 ||animSkillId == 3){
+//					newSkillid = 3;
+//					state = ControlState.Attack;
+//				}
+//				break;
+//			case 4:
+//				if(animSkillId == 0 || animSkillId == 1 ||animSkillId == 3){
+//					newSkillid = 4;
+//					state = ControlState.XuanFeng;
+//				}else if(animSkillId == 4){
+//					newSkillid = 0;
+//					localSkillId = 0;
+//					state = ControlState.Idle;
+//				}
+//				break;
+//		}
+//		if (newSkillid != -1) {
+//			anim.SetInteger(HashIds.Skillid,newSkillid);
+//
+//
+//			if (state == ControlState.Idle) {
+//				movePos = Vector3.zero;
+//				moveSpeed = 0f;
+//				speedFactor = 0f;
+//				anim.SetFloat(HashIds.Speed,speedFactor);
+//			}
+//
+//			if(state == ControlState.Attack){
+//				movePos = Vector3.zero;
+//				moveSpeed = 0f;
+//				speedFactor = 0f;
+//			}
+//			
+//			if (state == ControlState.Move) {
+//				if(movePos != Vector3.zero){
+//					moveDir = movePos - transform.position;
+//					moveDir[1] = 0f;
+//					transform.rotation = Quaternion.LookRotation(moveDir);
+//					float dis = Vector3.Distance(transform.position,movePos);
+//					if(dis > 0.1f){
+//						if(speedFactor>1f){
+//							speedFactor -=Time.deltaTime*status.speedFactorFade;
+//						}
+//					}else{
+//						movePos = Vector3.zero;
+//						localSkillId = 0;
+//					}
+//					anim.SetFloat(HashIds.Speed,speedFactor);
+//					transform.position+=transform.forward*Time.deltaTime*moveSpeed;
+//				}
+//			}
+//
+//		}
 
 		if (target != null) {   
 			EnemyAi ai = target.GetComponent<EnemyAi>();

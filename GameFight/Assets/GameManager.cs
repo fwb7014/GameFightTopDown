@@ -22,10 +22,14 @@ public class GameManager : MonoBehaviour {
 	public Transform playerSwawn;
 
 
+	private CameraFight cameraFight;
+
+
 
 
 	void Awake(){
 		currentPlayer = initPlayer (playerSwawn.position);
+		cameraFight = Camera.main.GetComponent<CameraFight> ();
 	}
 
 
@@ -76,6 +80,7 @@ public class GameManager : MonoBehaviour {
 		currentPlayer.SetActive (false);
 		Destroy (currentPlayer);
 		GameObject gobj = initPlayer (selfPos);
+		cameraFight.refreshTarget = true;
 		this.currentPlayer = gobj;
 	}
 }

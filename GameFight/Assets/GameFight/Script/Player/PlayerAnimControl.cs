@@ -44,7 +44,20 @@ public class PlayerAnimControl : MonoBehaviour {
 		case 4:
 			_skill = skill.getTechSkill(skillid);
 			break;
+		case 11:
+			_skill = skill.getNormalSkill(skillid);
+			break;
+		case 12:
+			_skill = skill.getNormalSkill(skillid);
+			break;
+		case 13:
+			_skill = skill.getNormalSkill(skillid);
+			break;
+		case 14:
+			_skill = skill.getTechSkill(skillid);
+			break;
 		}
+
 
 		if (_skill != null) {
 			triggerSkill (_skill);	

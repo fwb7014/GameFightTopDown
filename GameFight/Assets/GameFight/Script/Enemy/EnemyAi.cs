@@ -26,7 +26,7 @@ public class EnemyAi : MonoBehaviour {
 		status = GetComponent<EnemyStatus> ();
 		anim = GetComponent<Animator> ();
 		collider = GetComponent<CapsuleCollider> ();
-		target = GameObject.FindGameObjectWithTag (Tags.PLAYER).transform;
+		initTarget ();
 	}
 
 
@@ -36,12 +36,17 @@ public class EnemyAi : MonoBehaviour {
 		barScript = hpBar.GetComponent<Hp_bar> ();
 		barScript.Damaged (status.maxHp, status.hp, transform, status.height, -1);
 	}
+
+	void initTarget(){
+		target = GameObject.FindGameObjectWithTag (Tags.PLAYER).transform;
+	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (life) {
 
 			if(target == null){
+				initTarget();
 				return;
 			}
 			Vector3 newDir = target.position - transform.position;
@@ -85,9 +90,25 @@ public class EnemyAi : MonoBehaviour {
 			selfForceDir = selfAttackDir;
 			selfForce =110f;
 			break;
-			case 4:
+		case 4:
 			selfForceDir = selfAttackDir;
 			selfForce =85f;
+			break;
+		case 11:
+			selfForceDir = selfAttackDir;
+			selfForce =80f;
+			break;
+		case 12:
+			selfForceDir = selfAttackDir;
+			selfForce =80f;
+			break;
+		case 13:
+			selfForceDir = selfAttackDir;
+			selfForce =130f;
+			break;
+		case 14:
+			selfForceDir = selfAttackDir;
+			selfForce =135f;
 			break;
 		}
 

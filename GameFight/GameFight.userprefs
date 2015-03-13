@@ -1,9 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GameManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GameFight\Script\Enemy\EnemyAi.cs">
     <Files>
-      <File FileName="Assets\GameManager.cs" Line="74" Column="34" />
-      <File FileName="Assets\GameFight\Script\Player\PlayerControl.cs" Line="58" Column="1" />
+      <File FileName="Assets\GameFight\Script\Camera\CameraFight.cs" Line="31" Column="4" />
+      <File FileName="Assets\GameManager.cs" Line="39" Column="43" />
+      <File FileName="Assets\GameFight\Script\Player\PlayerControl.cs" Line="97" Column="20" />
+      <File FileName="Assets\GameFight\Script\Enemy\EnemyAi.cs" Line="29" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
