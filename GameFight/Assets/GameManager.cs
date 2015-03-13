@@ -14,7 +14,21 @@ public class GameManager : MonoBehaviour {
 	public int createEnmeyMaxCount;//每次生成最多的个数
 	private float createEnemyTime;
 	public float createEnemyTimeOrigin = 3f;
-	// Use this for initialization
+
+	//玩家相关
+	public GameObject[] playrs;
+	public int playerIndex = 0;
+	public GameObject currentPlayer;
+	public Transform playerSwawn;
+
+
+
+
+	void Awake(){
+		currentPlayer = initPlayer (playerSwawn.position);
+	}
+
+
 	void Start () {
 		enmeySpawnIndex = 0;
 		currentEnemyCount = 0;
@@ -48,5 +62,20 @@ public class GameManager : MonoBehaviour {
 		pos [1] = 0f;
 		Instantiate (enemyPrefab, pos, Quaternion.identity);
 		enmeySpawnIndex = (enmeySpawnIndex + 1) % enemySpawn.Length;
+	}
+	GameObject initPlayer(Vector3 pos){
+		GameObject gobj = Instantiate (playrs [playerIndex], pos, Quaternion.identity) as GameObject;
+		return gobj;
+	}
+	public void changePlayer(int playerIndex){
+		if (this.playerIndex == playerIndex) {
+			return ;		
+		}
+		this.playerIndex = playerIndex;
+		Vector3 selfPos = currentPlayer.transform.position;
+		currentPlayer.SetActive (false);
+		Destroy (currentPlayer);
+		GameObject gobj = initPlayer (selfPos);
+		this.currentPlayer = gobj;
 	}
 }

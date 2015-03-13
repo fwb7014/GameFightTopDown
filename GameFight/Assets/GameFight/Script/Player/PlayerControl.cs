@@ -56,8 +56,6 @@ public class PlayerControl : MonoBehaviour {
 	void Update () {
 		if (clickSkillCount == 0 && Input.anyKeyDown) {
 
-			Debug.Log ("update  方法中 name="+name);
-			name = null;
 			Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit rayHit;
 

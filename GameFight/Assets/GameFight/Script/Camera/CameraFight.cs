@@ -16,7 +16,10 @@ public class CameraFight : MonoBehaviour {
 	}
 
 	void Update () {
+		if (target == null)
+			return;
 		Vector3 newPos = Vector3.Lerp (transform.position,relVec+target.position,Time.deltaTime*moveSpeed);
 		transform.position = newPos;
 	}
+
 }
