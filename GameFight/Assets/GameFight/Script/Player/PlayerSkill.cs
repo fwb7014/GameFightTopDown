@@ -24,6 +24,8 @@ public class PlayerSkill : MonoBehaviour {
 	public class TechSkill:Skill
 	{
 		public TechSkillRange skillRange;
+		public Sprite textureUiSprite;
+		public float cdTime;
 
 	}
 

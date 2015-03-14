@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
-	public enum ControlState {Idle,Move,Attack,XuanFeng};
+	public enum ControlState {Idle,Move,Attack,skill4,skill14};
 	//战斗相关
 	public Transform target;
 	public Vector3 attackDir;
@@ -79,6 +79,8 @@ public class PlayerControl : MonoBehaviour {
 		//状态切换
 		int stateHash = anim.GetCurrentAnimatorStateInfo (0).nameHash;
 		int newSkillid = -1;
+
+
 		switch(localSkillId){ //0 idle 1 2 move  3 普通攻击 其他都是对应的技能
 		case(0):
 			if(stateHash == HashIds.IdleState || stateHash == HashIds.MoveState){
@@ -117,8 +119,38 @@ public class PlayerControl : MonoBehaviour {
 			break;
 		case(4):
 			if(stateHash == HashIds.IdleState || stateHash == HashIds.MoveState){
+				newSkillid = 4;
+				state = ControlState.skill4;
+			}else if(stateHash == HashIds.Attack1State|| stateHash == HashIds.Attack2State|| stateHash == HashIds.Attack3State){
 				newSkillid = 0;
 				state = ControlState.Idle;
+			}else if(stateHash == HashIds.Skill4State){
+				if(target == null){
+					localSkillId = 0;
+					state = ControlState.Idle;
+				}else{
+					localSkillId = 2;
+					state = ControlState.Attack;
+				}
+			}
+			break;
+		case(14):
+			Debug.Log ("###########################################");
+			if(stateHash == HashIds.IdleState || stateHash == HashIds.MoveState){
+				newSkillid = 14;
+				state = ControlState.skill14;
+			}else if(stateHash == HashIds.Attack1State|| stateHash == HashIds.Attack2State|| stateHash == HashIds.Attack3State){
+				newSkillid = 0;
+				state = ControlState.Idle;
+			}else if(stateHash == HashIds.Skill14State){
+				if(target == null){
+					localSkillId = 0;
+					state = ControlState.Idle;
+				}else{
+					localSkillId = 2;
+					state = ControlState.Attack;
+				}
+				
 			}
 			break;
 		}
@@ -360,13 +392,9 @@ public class PlayerControl : MonoBehaviour {
 
 	}
 
-	public void OnButtonClickBegin(){
-		clickSkillCount++;;
-	}
-
-	public void OnButtonClickEnd(){
-		localSkillId = 4;
-		clickSkillCount--;
+	public void OnButtonClickSkill(int skillid){
+		Debug.Log ("您点击了 技能  skillid = "+skillid);
+		localSkillId = skillid;
 	}
 
 }

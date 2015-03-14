@@ -27,11 +27,13 @@ public class Hp_bar : MonoBehaviour
         if (_maxhp != 0)
         {
             this._amount = (1f - (((float) _hp) / ((float) _maxhp))) * 0.5f;
+			_status = 0;
             this.amountU = (Vector2) (Vector2.right * this._amount);
-            if (_status == -1)
+            if (1==2)
             {
                 _status = this.oldstatus;
             }
+			Debug.Log (this._amount+"____"+_status);
             this.thismesh.uv = new Vector2[] { (this.originUV[0] + this.amountU) + (this.amuontV * _status), (this.originUV[1] + this.amountU) + (this.amuontV * _status), (this.originUV[2] + this.amountU) + (this.amuontV * _status), (this.originUV[3] + this.amountU) + (this.amuontV * _status) };
         }
         this.posY = _height;

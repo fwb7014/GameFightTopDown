@@ -16,6 +16,7 @@ public class Tags{
 	public const string ENEMY = "Enemy";
 	public const string EFS_MON = "efs_mon";
 	public const string DETECT = "detect";
+	public const string SKILL = "skill";
 
 }
 
@@ -32,6 +33,8 @@ public class HashIds{
 	public static int Attack1State = Animator.StringToHash("Base Layer.attack1");
 	public static int Attack2State = Animator.StringToHash("Base Layer.attack2");
 	public static int Attack3State = Animator.StringToHash("Base Layer.attack3");
+	public static int Skill4State = Animator.StringToHash("Base Layer.skill4");
+	public static int Skill14State = Animator.StringToHash("Base Layer.skill14");
 
 
 	public static int Dead = Animator.StringToHash("dead");

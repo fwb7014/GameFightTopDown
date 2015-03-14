@@ -62,6 +62,7 @@
      <Compile Include="Assets\GameFight\Script\Player\PlayerControl.cs" />
      <Compile Include="Assets\GameFight\Script\Player\PlayerSkill.cs" />
      <Compile Include="Assets\GameFight\Script\Player\PlayerStatus.cs" />
+     <Compile Include="Assets\GameFight\Script\Setting\FightSkillUI.cs" />
      <Compile Include="Assets\GameFight\Script\Setting\GameSetting.cs" />
      <Compile Include="Assets\GameFight\Test\A.cs" />
      <Compile Include="Assets\GameFight\Test\B.cs" />
@@ -69,6 +70,7 @@
      <Compile Include="Assets\GameFight\Test\TestCortinueMain.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\PlayerDetect.cs" />
+     <Compile Include="Assets\SkillScript.cs" />
      <Compile Include="Assets\WeaponControl.cs" />
      <None Include="Assets\GameFight\Model\Swordman\Swordman_Animation.txt" />
      <None Include="Assets\GameFight\Model\Wolf\Wolf_Animation.txt" />

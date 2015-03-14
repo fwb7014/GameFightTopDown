@@ -23,13 +23,15 @@ public class GameManager : MonoBehaviour {
 
 
 	private CameraFight cameraFight;
+	private FightSkillUI fightSkillUi;
 
 
 
 
 	void Awake(){
-		currentPlayer = initPlayer (playerSwawn.position);
 		cameraFight = Camera.main.GetComponent<CameraFight> ();
+		fightSkillUi = Camera.main.GetComponent<FightSkillUI> ();  
+		currentPlayer = initPlayer (playerSwawn.position);
 	}
 
 
@@ -69,6 +71,9 @@ public class GameManager : MonoBehaviour {
 	}
 	GameObject initPlayer(Vector3 pos){
 		GameObject gobj = Instantiate (playrs [playerIndex], pos, Quaternion.identity) as GameObject;
+		//开始 对技能的ui初始化
+		PlayerSkill skill = gobj.GetComponent<PlayerSkill> ();
+		fightSkillUi.initPlayerSkillUi (skill.techSkill);
 		return gobj;
 	}
 	public void changePlayer(int playerIndex){
